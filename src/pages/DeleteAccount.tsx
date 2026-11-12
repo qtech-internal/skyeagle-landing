@@ -42,7 +42,7 @@ const sections: DocSection[] = [
               <Mail size={16} /> Open email
             </a>
           </div>
-          <span style={{ color: 'var(--muted-fg)', fontSize: '0.875rem' }}>
+          <span style={{ color: 'var(--fg-2)', fontSize: '0.875rem' }}>
             If the button does not open your email app, copy the address above and write to us directly.
           </span>
         </div>

@@ -1,4 +1,5 @@
 import { Moon, Sun } from 'lucide-react'
+import { MotionConfig } from 'motion/react'
 import { useEffect, useState, type ReactNode } from 'react'
 import { site } from '../site'
 
@@ -47,8 +48,8 @@ function ThemeToggle() {
 export function Logo() {
   return (
     <a className="logo" href="/" aria-label={`${site.brand} home`}>
-      <img className="on-light" src="/brand/logo-horizontal-light.svg" alt="" width={168} height={24} />
-      <img className="on-dark" src="/brand/logo-horizontal-dark.svg" alt="" width={168} height={24} />
+      <img className="on-light" src="/brand/logo-horizontal-light.svg" alt="" width={150} height={21} />
+      <img className="on-dark" src="/brand/logo-horizontal-dark.svg" alt="" width={150} height={21} />
     </a>
   )
 }
@@ -57,12 +58,13 @@ const homeLinks = [
   ['/#platform', 'Platform'],
   ['/#how-it-works', 'How it works'],
   ['/#apps', 'Apps'],
-  ['/#transparency', 'Transparency'],
+  ['/#transparency', 'Fairness'],
+  ['/#questions', 'Questions'],
 ] as const
 
 export default function Shell({ children }: { children: ReactNode }) {
   return (
-    <>
+    <MotionConfig reducedMotion="user">
       <a className="skip" href="#main">
         Skip to content
       </a>
@@ -79,7 +81,7 @@ export default function Shell({ children }: { children: ReactNode }) {
           </nav>
           <div className="header-actions">
             <ThemeToggle />
-            <a className="btn btn-primary" href="/#contact">
+            <a className="btn btn-primary btn-sm" href="/#contact">
               Request a demo
             </a>
           </div>
@@ -93,10 +95,7 @@ export default function Shell({ children }: { children: ReactNode }) {
           <div className="footer-top">
             <div className="footer-brand">
               <Logo />
-              <p>
-                Device financing operations for mobile retailers: enrolment, instalment records and device
-                controls in one place.
-              </p>
+              <p>One platform for retailers who sell phones on instalments.</p>
               <p>{site.address}</p>
             </div>
             <div className="footer-cols">
@@ -139,6 +138,6 @@ export default function Shell({ children }: { children: ReactNode }) {
           </div>
         </div>
       </footer>
-    </>
+    </MotionConfig>
   )
 }
