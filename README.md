@@ -1,58 +1,52 @@
-# 🦅 Sky Eagle - Financed Phone EMI & MDM Platform
+# Sky Eagle website
 
-Modern, responsive, high-converting Landing Page application built with **Vite**, **React**, **TypeScript**, and **Lucide Icons**.
+The public site at skyeagle.online: the landing page, the privacy policy and the
+account deletion page. Built with Vite, React and TypeScript.
 
----
+## Pages
 
-## 🚀 Quick Start
+| URL | Entry | Purpose |
+|---|---|---|
+| `/` | `index.html` | Landing page |
+| `/privacy/` | `privacy/index.html` | Privacy policy. Linked from both Play Store listings. |
+| `/delete-account/` | `delete-account/index.html` | How to request account and data deletion. Linked from the Play Data safety forms. |
 
-### 1. Project Directory me jayein:
-```bash
-cd sky-eagle
-```
+Each page is its own HTML entry, so the URLs work on any static host without
+rewrite rules. Do not rename `/privacy/` or `/delete-account/`: the store
+listings point at them.
 
-### 2. Dependencies Install karein (Already Installed):
+## Run
+
 ```bash
 npm install
+npm run dev       # http://localhost:5173
+npm run build     # output in dist/
+npm run preview   # serve dist/ locally
+npm run lint
 ```
 
-### 3. Dev Server Run karein:
-```bash
-npm run dev
-```
-Ye aapke local browser me `http://localhost:5173` par live ho jayega.
-
----
-
-## 🛠️ Available Scripts
-
-- **`npm run dev`** : Starts local Vite development server with instant HMR (Hot Module Replacement).
-- **`npm run build`** : Builds the optimized production bundle inside `dist/`.
-- **`npm run preview`** : Locally preview the production build.
-
----
-
-## 📁 Project Structure
+## Where things live
 
 ```text
-sky-eagle/
-├── index.html                   # HTML template with Google Fonts & metadata
-├── package.json                 # Project dependencies & scripts
-├── vite.config.ts               # Vite configuration
-├── src/
-│   ├── main.tsx                 # React DOM Root
-│   ├── App.tsx                  # App wrapper with Toast alert system
-│   ├── index.css                # Global CSS reset & fonts
-│   └── components/
-│       └── LandingPage/
-│           ├── LandingPage.tsx  # Sky Eagle Landing Page Component
-│           └── LandingPage.css  # Scoped component styles & animations
-└── dist/                        # Production build output
+index.html, privacy/, delete-account/   HTML entries
+src/site.ts                             company facts the pages state (names, emails, dates)
+src/styles/site.css                     design tokens and all styles, light and dark
+src/components/Shell.tsx                header, footer, theme toggle
+src/components/DocPage.tsx              layout for the policy and deletion pages
+src/pages/                              Home, Privacy, DeleteAccount
+public/brand/                           logo files, copied from mdm-admin/public/brand
 ```
 
----
+## Design
 
-## ✨ Features
-- **Interactive Phone Device Simulator**: Real-time interactive actions (Lock Device, Unlock, GPS Locate, Due Alert, Shop-Floor QR Provisioning) with live animations.
-- **Auto Dark Mode Support**: Glowing neon accents, glassmorphism cards, and radial backdrop gradients.
-- **100% Responsive**: Seamlessly adapts to Desktop, Laptop, Tablet, and Mobile screens.
+The site follows the admin dashboard's neutral palette (white or near-black
+surfaces, hairline borders, near-black primary) and takes the Geist typeface,
+the green and amber status colours and the pill-shaped buttons from the Partner
+and Customer apps. It follows the system theme and has a manual toggle.
+
+## Editing the policy
+
+The privacy policy and the deletion page are public commitments. Change the
+facts in `src/site.ts` and the text in `src/pages/Privacy.tsx` or
+`src/pages/DeleteAccount.tsx` only when the business has agreed to the change,
+and update `policyEffectiveDate` when the policy text changes.

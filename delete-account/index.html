@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Delete your account and data | Sky Eagle</title>
+    <meta name="description" content="How to request deletion of your Sky Eagle account and the personal data associated with it." />
+    <link rel="icon" type="image/svg+xml" href="/brand/favicon.svg" />
+    <link rel="apple-touch-icon" href="/brand/skyeagle-icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <script>
+      // Apply a saved theme before first paint; with none saved the system setting decides.
+      try {
+        var t = localStorage.getItem('se-theme');
+        if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/entries/delete-account.tsx"></script>
+  </body>
+</html>
