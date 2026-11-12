@@ -234,6 +234,29 @@ button {
   display: block;
 }
 
+/* ---------- Theme toggle: the icon for the other theme is shown ---------- */
+
+.theme-toggle .sun {
+  display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .theme-toggle .sun {
+    display: block;
+  }
+  :root:not([data-theme='light']) .theme-toggle .moon {
+    display: none;
+  }
+}
+
+:root[data-theme='dark'] .theme-toggle .sun {
+  display: block;
+}
+
+:root[data-theme='dark'] .theme-toggle .moon {
+  display: none;
+}
+
 /* ---------- Buttons and links ---------- */
 
 .btn {

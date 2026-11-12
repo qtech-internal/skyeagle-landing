@@ -1,6 +1,15 @@
 import { Info } from 'lucide-react'
-import DocPage, { type DocSection } from '../components/DocPage'
-import { apps, site } from '../site'
+import type { Metadata } from 'next'
+import Link from 'next/link'
+import { DocPage, type DocSection } from '@/components/doc-page'
+import { apps, site } from '@/lib/site'
+
+export const metadata: Metadata = {
+  title: 'Privacy Policy',
+  description:
+    'How Sky Eagle collects, uses, shares and deletes personal data in the Sky Eagle Partner app, the Sky Eagle Customer app and on phones enrolled by a Sky Eagle retailer.',
+  alternates: { canonical: '/privacy/' },
+}
 
 const mail = <a href={`mailto:${site.privacyEmail}`}>{site.privacyEmail}</a>
 
@@ -227,7 +236,7 @@ const sections: DocSection[] = [
           </li>
           <li>
             <strong>Deletion.</strong> You can ask us to delete your account and personal data. The steps are
-            on the <a href="/delete-account/">Delete account and data</a> page.
+            on the <Link href="/delete-account/">Delete account and data</Link> page.
           </li>
           <li>
             <strong>Permissions.</strong> You can turn off location, camera or notification access in your

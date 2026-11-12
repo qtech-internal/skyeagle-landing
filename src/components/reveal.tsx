@@ -1,11 +1,13 @@
+"use client"
+
 import { motion } from 'motion/react'
 import type { ReactNode } from 'react'
 
 /**
  * Brings a block in as it enters the viewport: a short rise and fade, once.
- * Under reduced motion the MotionConfig in Shell turns the movement off.
+ * Under reduced motion the MotionProvider turns the movement off.
  */
-export default function Reveal({ children, delay = 0, className }: { children: ReactNode; delay?: number; className?: string }) {
+export function Reveal({ children, delay = 0, className }: { children: ReactNode; delay?: number; className?: string }) {
   return (
     <motion.div
       className={className}

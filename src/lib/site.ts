@@ -13,6 +13,7 @@ export const site = {
   address: 'Ludhiana, Punjab, India',
   url: 'https://skyeagle.online',
   policyEffectiveDate: '12 November 2026',
+  copyrightYear: 2026,
   /** Days within which a verified deletion request is completed. */
   deletionDays: 30,
 } as const

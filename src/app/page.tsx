@@ -1,8 +1,9 @@
 import { Bell, Check, ChevronRight, Lock, MapPin, Unlock } from 'lucide-react'
-import PhoneDemo from '../components/PhoneDemo'
-import Reveal from '../components/Reveal'
-import Shell from '../components/Shell'
-import { apps, site } from '../site'
+import type { Metadata } from 'next'
+import Link from 'next/link'
+import { PhoneDemo } from '@/components/phone-demo'
+import { Reveal } from '@/components/reveal'
+import { apps, site } from '@/lib/site'
 
 /* A fixed pattern that reads as a QR code. Decorative only. */
 const QR_SIZE = 17
@@ -70,9 +71,13 @@ const faqs = [
   ],
 ] as const
 
+export const metadata: Metadata = {
+  alternates: { canonical: '/' },
+}
+
 export default function Home() {
   return (
-    <Shell>
+    <>
       {/* ---------- Hero ---------- */}
       <section className="hero">
         <div className="wrap">
@@ -327,12 +332,12 @@ export default function Home() {
             </Reveal>
           </div>
           <p className="legal-links">
-            <a className="link-more" href="/privacy/">
+            <Link className="link-more" href="/privacy/">
               Read the Privacy Policy <ChevronRight size={16} />
-            </a>
-            <a className="link-more" href="/delete-account/">
+            </Link>
+            <Link className="link-more" href="/delete-account/">
               Delete your account and data <ChevronRight size={16} />
-            </a>
+            </Link>
           </p>
         </div>
       </section>
@@ -372,6 +377,6 @@ export default function Home() {
           </Reveal>
         </div>
       </section>
-    </Shell>
+    </>
   )
 }

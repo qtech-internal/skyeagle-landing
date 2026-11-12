@@ -1,5 +1,4 @@
 import type { ReactNode } from 'react'
-import Shell from './Shell'
 
 export interface DocSection {
   id: string
@@ -17,9 +16,9 @@ interface DocPageProps {
 }
 
 /** Layout shared by the policy and deletion pages: contents on the left, text on the right. */
-export default function DocPage({ title, summary, meta, sections, lead }: DocPageProps) {
+export function DocPage({ title, summary, meta, sections, lead }: DocPageProps) {
   return (
-    <Shell>
+    <>
       <div className="doc-hero">
         <div className="wrap">
           <h1>{title}</h1>
@@ -58,6 +57,6 @@ export default function DocPage({ title, summary, meta, sections, lead }: DocPag
           ))}
         </article>
       </div>
-    </Shell>
+    </>
   )
 }

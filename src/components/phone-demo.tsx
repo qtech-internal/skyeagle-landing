@@ -1,3 +1,5 @@
+"use client"
+
 import {
   Bell,
   CheckCircle2,
@@ -59,7 +61,7 @@ function StatusBar({ tone }: { tone: 'light' | 'dark' }) {
   )
 }
 
-export default function PhoneDemo() {
+export function PhoneDemo() {
   const [paid, setPaid] = useState(START_PAID)
   const [overdue, setOverdue] = useState(true)
   const [locked, setLocked] = useState(false)

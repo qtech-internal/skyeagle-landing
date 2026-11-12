@@ -1,6 +1,14 @@
 import { Mail } from 'lucide-react'
-import DocPage, { type DocSection } from '../components/DocPage'
-import { apps, site } from '../site'
+import type { Metadata } from 'next'
+import Link from 'next/link'
+import { DocPage, type DocSection } from '@/components/doc-page'
+import { apps, site } from '@/lib/site'
+
+export const metadata: Metadata = {
+  title: 'Delete your account and data',
+  description: 'How to ask Sky Eagle to delete your account and the personal data associated with it.',
+  alternates: { canonical: '/delete-account/' },
+}
 
 const subject = encodeURIComponent('Account deletion request')
 const body = encodeURIComponent(
@@ -79,7 +87,7 @@ const sections: DocSection[] = [
           </li>
         </ul>
         <p>
-          Details are in the <a href="/privacy/#retention">Privacy Policy</a>.
+          Details are in the <Link href="/privacy/#retention">Privacy Policy</Link>.
         </p>
       </>
     ),
