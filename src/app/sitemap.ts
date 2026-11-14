@@ -1,12 +1,16 @@
 import type { MetadataRoute } from "next"
 import { site } from "@/lib/site"
 
-const routes = ["/", "/privacy/", "/delete-account/"] as const
+export const dynamic = "force-static"
+
+// The policy pages change only when the policy does; the landing page is
+// stamped with the build date.
+const policyDate = new Date(`${site.policyEffectiveDate} UTC`)
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return routes.map((path) => ({
-    url: `${site.url}${path}`,
-    changeFrequency: path === "/" ? "monthly" : "yearly",
-    priority: path === "/" ? 1 : 0.5,
-  }))
+  return [
+    { url: `${site.url}/`, lastModified: new Date(), changeFrequency: "monthly", priority: 1 },
+    { url: `${site.url}/privacy/`, lastModified: policyDate, changeFrequency: "yearly", priority: 0.5 },
+    { url: `${site.url}/delete-account/`, lastModified: policyDate, changeFrequency: "yearly", priority: 0.5 },
+  ]
 }

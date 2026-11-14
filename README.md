@@ -73,3 +73,41 @@ The privacy policy and the deletion page are public commitments. Change the
 facts in `src/lib/site.ts` and the text in the two page files only when the
 business has agreed to the change, and update `policyEffectiveDate` when the
 policy text changes.
+
+## Production deployment (Docker)
+
+Production serves the site as a **static export behind unprivileged nginx**:
+no Node.js runs in production. The image is about 100 MB and the container
+uses about 5 MB of RAM.
+
+```text
+Dockerfile                     build stage: next build (NEXT_OUTPUT=export) -> out/
+                               runtime stage: nginx-unprivileged serving out/
+deploy/nginx/nginx.conf        caching, gzip_static, rate limit, GET/HEAD only, real client IP
+deploy/nginx/security-headers.conf   HSTS, nosniff, frame denial, permissions policy, COOP/CORP
+deploy/gen-csp.mjs             hashes every inline <script> at build time -> strict CSP
+deploy/deploy.sh               git pull + rebuild + health-checked restart
+docker-compose.yml             read-only rootfs, all capabilities dropped, memory/CPU/pid limits
+```
+
+Traffic reaches the container through the shared Caddy edge proxy in
+`/srv/apps/edge-proxy` on the external docker network `edge`. Caddy terminates
+TLS (automatic Let's Encrypt, HTTP/3) and redirects `www.` to the apex domain.
+The container is also published on `127.0.0.1:8081` for local health checks.
+
+```bash
+./deploy/deploy.sh            # deploy latest main
+docker compose logs -f        # nginx access logs
+curl -s 127.0.0.1:8081/healthz
+```
+
+`pnpm dev` / `pnpm start` are unaffected: the static export only turns on when
+`NEXT_OUTPUT=export` is set, which the Dockerfile does.
+
+## SEO
+
+- Per-page title, description, canonical, Open Graph and Twitter tags come from `pageMetadata()` in `src/lib/seo.ts`.
+- `src/app/opengraph-image.tsx` renders the 1200x630 share image at build time (also used for `twitter:image`).
+- Organization and WebSite JSON-LD live in `src/app/layout.tsx`.
+- `robots.txt`, `sitemap.xml`, `manifest.webmanifest`, `favicon.ico`, `icon.svg` and `apple-icon.png` are generated from `src/app/`.
+- `public/.well-known/security.txt` expires on 2027-11-14. Renew the `Expires` date before then.

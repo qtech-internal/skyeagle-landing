@@ -2,14 +2,15 @@ import { Info } from 'lucide-react'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { DocPage, type DocSection } from '@/components/doc-page'
+import { pageMetadata } from '@/lib/seo'
 import { apps, site } from '@/lib/site'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Privacy Policy',
   description:
     'How Sky Eagle collects, uses, shares and deletes personal data in the Sky Eagle Partner app, the Sky Eagle Customer app and on phones enrolled by a Sky Eagle retailer.',
-  alternates: { canonical: '/privacy/' },
-}
+  path: '/privacy/',
+})
 
 const mail = <a href={`mailto:${site.privacyEmail}`}>{site.privacyEmail}</a>
 

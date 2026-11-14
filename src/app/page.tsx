@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { PhoneDemo } from '@/components/phone-demo'
 import { Reveal } from '@/components/reveal'
+import { pageMetadata } from '@/lib/seo'
 import { apps, site } from '@/lib/site'
 
 /* A fixed pattern that reads as a QR code. Decorative only. */
@@ -71,9 +72,7 @@ const faqs = [
   ],
 ] as const
 
-export const metadata: Metadata = {
-  alternates: { canonical: '/' },
-}
+export const metadata: Metadata = pageMetadata({ path: '/' })
 
 export default function Home() {
   return (

@@ -5,26 +5,34 @@ import { SiteFooter } from "@/components/layout/site-footer"
 import { SiteHeader } from "@/components/layout/site-header"
 import { MotionProvider } from "@/components/motion-provider"
 import { ThemeProvider } from "@/components/theme-provider"
+import { defaultDescription, defaultTitle, pageMetadata } from "@/lib/seo"
 import { site } from "@/lib/site"
 
 export const metadata: Metadata = {
+  ...pageMetadata({ path: "/" }),
   metadataBase: new URL(site.url),
-  title: {
-    default: `${site.brand} | Phones sold on instalments, managed with confidence`,
-    template: `%s | ${site.brand}`,
+  title: { default: defaultTitle, template: `%s | ${site.brand}` },
+  description: defaultDescription,
+  applicationName: site.brand,
+  keywords: [
+    "phone EMI management",
+    "mobile instalment software",
+    "device lock on EMI",
+    "mobile retailer software",
+    "EMI phone finance India",
+    "Sky Eagle Partner",
+    "Sky Eagle Customer",
+  ],
+  authors: [{ name: site.legalName, url: site.url }],
+  creator: site.legalName,
+  publisher: site.legalName,
+  category: "business",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 },
   },
-  description:
-    "Sky Eagle helps mobile retailers enrol the phones they sell on instalments, keep the instalment record and stay in touch with the customer until the last payment.",
-  icons: {
-    icon: [{ url: "/brand/favicon.svg", type: "image/svg+xml" }],
-    apple: [{ url: "/brand/skyeagle-icon.png" }],
-  },
-  openGraph: {
-    type: "website",
-    siteName: site.brand,
-    url: "/",
-  },
-  formatDetection: { telephone: false },
+  formatDetection: { telephone: false, email: false, address: false },
 }
 
 export const viewport: Viewport = {
@@ -36,10 +44,40 @@ export const viewport: Viewport = {
   ],
 }
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${site.url}/#organization`,
+      name: site.brand,
+      legalName: site.legalName,
+      url: `${site.url}/`,
+      logo: { "@type": "ImageObject", url: `${site.url}/brand/icon-512.png`, width: 512, height: 512 },
+      email: site.supportEmail,
+      address: { "@type": "PostalAddress", addressLocality: "Ludhiana", addressRegion: "Punjab", addressCountry: "IN" },
+      contactPoint: { "@type": "ContactPoint", contactType: "customer support", email: site.supportEmail, areaServed: "IN" },
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${site.url}/#website`,
+      url: `${site.url}/`,
+      name: site.brand,
+      inLanguage: "en-IN",
+      publisher: { "@id": `${site.url}/#organization` },
+    },
+  ],
+}
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en-IN" suppressHydrationWarning>
       <body>
+        <script
+          type="application/ld+json"
+          // Static JSON built from site.ts at build time; no user input.
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
+        />
         {/* Without scripts the scroll reveals never run, so show their content outright. */}
         <noscript>
           <style>{`[style*="opacity"]{opacity:1!important;transform:none!important}`}</style>

@@ -2,13 +2,15 @@ import { Mail } from 'lucide-react'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { DocPage, type DocSection } from '@/components/doc-page'
+import { pageMetadata } from '@/lib/seo'
 import { apps, site } from '@/lib/site'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Delete your account and data',
-  description: 'How to ask Sky Eagle to delete your account and the personal data associated with it.',
-  alternates: { canonical: '/delete-account/' },
-}
+  description:
+    'How to ask Sky Eagle to delete your account and the personal data associated with it.',
+  path: '/delete-account/',
+})
 
 const subject = encodeURIComponent('Account deletion request')
 const body = encodeURIComponent(
