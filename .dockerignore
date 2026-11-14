@@ -11,4 +11,3 @@ build
 .idea
 Dockerfile
 docker-compose*.yml
-deploy/Caddyfile
