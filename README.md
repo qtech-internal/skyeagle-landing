@@ -90,9 +90,12 @@ deploy/deploy.sh               git pull + rebuild + health-checked restart
 docker-compose.yml             read-only rootfs, all capabilities dropped, memory/CPU/pid limits
 ```
 
-Traffic reaches the container through the shared Caddy edge proxy in
-`/srv/apps/edge-proxy` on the external docker network `edge`. Caddy terminates
-TLS (automatic Let's Encrypt, HTTP/3) and redirects `www.` to the apex domain.
+Traffic reaches the container through the shared nginx edge proxy in
+`/srv/apps/edge-proxy` on the external docker network `edge`. The edge proxy
+terminates TLS (Let's Encrypt certificates from certbot, renewed automatically,
+HTTP/2 and HTTP/3) and takes the real client IP from Cloudflare's
+`CF-Connecting-IP`. Its site config for this app is
+`/srv/apps/edge-proxy/nginx/conf.d/skyeagle.online.conf`.
 The container is also published on `127.0.0.1:8081` for local health checks.
 
 ```bash
