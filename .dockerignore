@@ -1,0 +1,14 @@
+.git
+.github
+node_modules
+.next
+out
+build
+*.md
+!README.md
+.env*
+.vscode
+.idea
+Dockerfile
+docker-compose*.yml
+deploy/Caddyfile
