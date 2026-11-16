@@ -124,6 +124,15 @@ const sections: DocSection[] = [
               <td>Alerts about customers, devices and verification.</td>
               <td>Instalment reminders and updates about your device.</td>
             </tr>
+            <tr>
+              <td>Fingerprint or face unlock</td>
+              <td>
+                Optional sign-in using the phone’s own fingerprint or face unlock. Your fingerprint and face
+                data stay on your device and are never sent to us; we only receive confirmation that the
+                device verified you.
+              </td>
+              <td>Not used.</td>
+            </tr>
           </tbody>
         </table>
       </div>
